@@ -1,16 +1,28 @@
 package arkis.SweetsList.domain.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
+import java.io.Serializable;
+import java.util.List;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
 @Entity
-public class Sweets {
+public class Sweets implements Serializable {
     @Id
-    @Column
+    @Column(name = "sweets_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int sweetsId;
+    private Integer sweetsId;
+
+    @Column(unique = true)
+    private String name;
 
     @Column(nullable = false)
-    private int calorie;
+    private Integer calorie;
 
     @Column
     @Lob
@@ -18,37 +30,12 @@ public class Sweets {
     private byte[] img;
 
     @ManyToOne
+    @JoinColumn(name="user_id")
     private User user;
 
-    public int getSweetsId() {
-        return sweetsId;
-    }
+    @OneToMany(mappedBy = "sweets", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(nullable = true)
+    private List<Review> reviews;
 
-    public void setSweetsId(int sweetsId) {
-        this.sweetsId = sweetsId;
-    }
 
-    public int getCalorie() {
-        return calorie;
-    }
-
-    public void setCalorie(int calorie) {
-        this.calorie = calorie;
-    }
-
-    public byte[] getImg() {
-        return img;
-    }
-
-    public void setImg(byte[] img) {
-        this.img = img;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

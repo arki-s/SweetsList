@@ -1,84 +1,43 @@
 package arkis.SweetsList.domain.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
 @Entity
-public class User {
+@Table(name= "usr")
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int UserId;
+    @Column(name = "user_id")
+    private Integer userId;
 
+    @Column
     private String userName;
 
+    @Column(unique = true)
     private String email;
 
+    @Column
     private String password;
 
+    @Column
     private String role;
 
-    @OneToMany(mappedBy = "User")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @Column(nullable = true)
     private List<Sweets> sweets;
 
-    @OneToMany(mappedBy = "User")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @Column(nullable = true)
     private List<Review> reviews;
 
-    public int getUserId() {
-        return UserId;
-    }
 
-    public void setUserId(int userId) {
-        UserId = userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public List<Sweets> getSweets() {
-        return sweets;
-    }
-
-    public void setSweets(List<Sweets> sweets) {
-        this.sweets = sweets;
-    }
-
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
 }
