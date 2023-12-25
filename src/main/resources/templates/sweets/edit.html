@@ -8,6 +8,22 @@
 <body>
 <div layout:fragment="content">
     <h1>Sweets Edit</h1>
+    <form method="post" th:action="@{/sweets/create}" th:object="${formModel}">
+        <input type="hidden" name="taskId" th:value="*{sweetsId}">
+        <div class="mb-3">
+            <label>名前</label>
+            <input th:value="*{name}" name="name" type="text" class="form-control"/>
+        </div>
+        <div class="mb-3">
+            <label>カロリー(kcal)</label>
+            <input th:value="*{calorie}" name="calorie" type="text" class="form-control"/>
+        </div>
+        <div class="mb-3">
+            <label>コメント</label>
+            <textarea th:text="*{comment}" name="comment" class="form-control"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">編集</button>
+    </form>
 
 </div>
 <style layout:fragment="style"></style>

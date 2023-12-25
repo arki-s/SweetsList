@@ -8,7 +8,13 @@
 <body>
 <div layout:fragment="content">
     <h1>Sweets Detail</h1>
+<div>
+    <p th:text="${sweets.name}"></p>
+    <p th:text="${sweets.calorie}"></p>
+    <p th:text="${sweets.comment}"></p>
+</div>
 
+    <h1>レビューフォームこの辺に追加予定</h1>
 </div>
 <style layout:fragment="style"></style>
 <script layout:fragment="script"></script>

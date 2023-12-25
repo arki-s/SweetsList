@@ -28,6 +28,14 @@ public class SweetsController {
         return mav;
     }
 
+    @GetMapping("sweets/{sweetsId}/detail")
+    public ModelAndView sweetsdetail(ModelAndView mav, @PathVariable int sweetsId){
+        mav.setViewName("sweets/detail");
+        Optional<Sweets> data = sweetsRepository.findById((Integer)sweetsId);
+        mav.addObject("sweets", data.get());
+        return mav;
+    }
+
     @GetMapping("sweets/create")
     public ModelAndView sweetscreate(ModelAndView mav, @ModelAttribute("formModel")Sweets sweets){
         mav.setViewName("sweets/create");
@@ -37,7 +45,7 @@ public class SweetsController {
     @PostMapping("sweets/create")
     public ModelAndView sweetscreateform(ModelAndView mav, @ModelAttribute("formModel")Sweets sweets){
         sweetsRepository.saveAndFlush(sweets);
-        return new ModelAndView("redirect:sweets/index");
+        return new ModelAndView("redirect:/sweets/index");
     }
 
     @GetMapping("sweets/{sweetsId}/edit")
@@ -52,14 +60,14 @@ public class SweetsController {
     @PostMapping("sweets/edit")
     public ModelAndView sweetseditform(ModelAndView mav, @ModelAttribute("formModel")Sweets sweets){
         sweetsRepository.saveAndFlush(sweets);
-        return new ModelAndView("redirect:sweets/index");
+        return new ModelAndView("redirect:/sweets/index");
     }
 
     @Transactional
     @PostMapping("sweets/{sweetsId}/delete")
     public ModelAndView sweetsdelete(ModelAndView mav, @RequestParam Integer sweetsId){
         sweetsRepository.deleteById(sweetsId);
-        return new ModelAndView("redirect:sweets/index");
+        return new ModelAndView("redirect:/sweets/index");
     }
 
     @PostConstruct
