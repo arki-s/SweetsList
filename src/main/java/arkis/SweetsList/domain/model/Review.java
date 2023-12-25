@@ -29,10 +29,6 @@ public class Review implements Serializable {
     private String comment;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
-    private User user;
-
-    @ManyToOne
     @JoinColumn(name="sweets_id")
     private Sweets sweets;
 
