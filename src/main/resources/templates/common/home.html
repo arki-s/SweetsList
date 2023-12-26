@@ -7,24 +7,25 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1>共通のホーム画面</h1>
-    <p>ナビゲーションバーはそのうち削除予定</p>
+    <div class="home">
+        <h1 class="title">
+            <span>SweetsList</span>
+        </h1>
+    </div>
 
 </div>
-<style layout:fragment="style"></style>
+<style layout:fragment="style">
+    html, body {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0,0,0,0.3)), url(/img/berries.jpg);
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100%;
+
+    }
+
+</style>
 <script layout:fragment="script"></script>
 </body>
 </html>
-
-
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<h1>共通のホーム画面</h1>-->
-<!--</body>-->
-<!--</html>-->

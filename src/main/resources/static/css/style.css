@@ -1,0 +1,36 @@
+.title {
+  animation: poyoyon 0.5s cubic-bezier(0.12, 0, 0.39, 0) 1 forwards;
+}
+
+.home {
+  position: absolute;
+  top: 50%;
+}
+.home h1 {
+  color: white;
+  font-size: 72px;
+  font-family:Impact;
+}
+
+@keyframes poyoyon {
+  0% {
+    transform: translateX(200px);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(0);
+  }
+  65% {
+    transform: translateX(30px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+  20%,100% {
+    opacity: 1;
+  }
+}
+
+.common-container {
+margin:1rem;
+}

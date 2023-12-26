@@ -7,7 +7,8 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1>Review index</h1>
+    <div class="common-container">
+    <h1>レビューリスト</h1>
 <div th:each="review : ${reviewList}">
     <p th:text="${review.sweets.name}"></p>
     <p th:text="${review.date}"></p>
@@ -18,6 +19,7 @@
         <input type="submit" value="削除" class="btn btn-danger" />
     </form>
 </div>
+    </div>
 
 </div>
 <style layout:fragment="style"></style>

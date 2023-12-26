@@ -7,7 +7,8 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1>Sweets Create</h1>
+    <div class="common-container">
+<h1>スイーツを追加🩷</h1>
 <form method="post" th:action="@{/sweets/create}" th:object="${formModel}">
     <div class="mb-3">
         <label>名前</label>
@@ -21,9 +22,9 @@
         <label>コメント</label>
         <textarea th:field="*{comment}" name="comment" class="form-control"></textarea>
     </div>
-    <button type="submit" class="btn btn-primary">保存</button>
+    <button type="submit" class="btn btn-info">保存</button>
 </form>
-
+    </div>
 </div>
 <style layout:fragment="style"></style>
 <script layout:fragment="script"></script>

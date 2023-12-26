@@ -7,17 +7,21 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1>Sweets Index</h1>
+    <div class="common-container">
+    <h1>スイーツリスト</h1>
     <div th:each="sweets : ${sweetsList}">
         <p th:text="${sweets.name}"></p>
-        <p th:text="${sweets.calorie}"></p>
+        <div class="d-flex">
+            <p th:text="${sweets.calorie}"></p><p>kcal</p>
+        </div>
         <p th:text="${sweets.comment}"></p>
-        <a th:href="@{'/sweets/' + ${sweets.sweetsId} + '/detail'}" class="btn btn-primary">詳細</a>
-        <a th:href="@{'/sweets/' + ${sweets.sweetsId} + '/edit'}" class="btn btn-primary">編集</a>
+        <a th:href="@{'/sweets/' + ${sweets.sweetsId} + '/detail'}" class="btn btn-success">詳細</a>
+        <a th:href="@{'/sweets/' + ${sweets.sweetsId} + '/edit'}" class="btn btn-info">編集</a>
         <form th:action="@{'/sweets/' + ${sweets.sweetsId} + '/delete'}" method="post" onSubmit="return check()">
             <input type="hidden" name="sweetsId" th:value="${sweets.sweetsId}" />
             <input type="submit" value="削除" class="btn btn-danger" />
         </form>
+    </div>
     </div>
 </div>
 <style layout:fragment="style"></style>

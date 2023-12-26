@@ -7,18 +7,21 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1>Sweets Detail</h1>
+    <div class="common-container">
 <div>
-    <p th:text="${sweets.name}"></p>
-    <p th:text="${sweets.calorie}"></p>
+    <h1 th:text="${sweets.name}"></h1>
+    <div class="d-flex">
+        <p th:text="${sweets.calorie}"></p><p>kcal</p>
+    </div>
     <p th:text="${sweets.comment}"></p>
 </div>
+    <h5>レビュー</h5>
     <div th:each="review : ${sweets.reviews}">
         <p th:text="${review.date}"></p>
         <p th:text="${review.rating}"></p>
         <p th:text="${review.comment}"></p>
     </div>
-
+<h5>レビューを追加🧡</h5>
     <form method="post" th:action="@{/review/create}" th:object="${reviewModel}">
         <input type="hidden" th:value="${sweets.sweetsId}" name="sweets">
         <div class="mb-3">
@@ -29,9 +32,9 @@
             <label>コメント</label>
             <textarea name="comment" class="form-control"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">レビューを追加</button>
+        <button type="submit" class="btn btn-info">レビューを追加</button>
     </form>
-
+    </div>
 </div>
 <style layout:fragment="style"></style>
 <script layout:fragment="script"></script>
