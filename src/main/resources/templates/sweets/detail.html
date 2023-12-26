@@ -13,8 +13,11 @@
     <p th:text="${sweets.calorie}"></p>
     <p th:text="${sweets.comment}"></p>
 </div>
-
-    <h1>レビューフォームこの辺に追加予定</h1>
+    <div th:each="review : ${sweets.reviews}">
+        <p th:text="${review.date}"></p>
+        <p th:text="${review.rating}"></p>
+        <p th:text="${review.comment}"></p>
+    </div>
 </div>
 <style layout:fragment="style"></style>
 <script layout:fragment="script"></script>

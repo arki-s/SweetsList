@@ -8,6 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface SweetsRepository extends JpaRepository<Sweets, Integer>{
+    Optional<Sweets> findById(Integer name);
 
-    public Optional<Sweets> findById(Integer name);
 }

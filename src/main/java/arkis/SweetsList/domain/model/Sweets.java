@@ -37,5 +37,4 @@ public class Sweets implements Serializable {
     @Column(nullable = true)
     private List<Review> reviews;
 
-
 }

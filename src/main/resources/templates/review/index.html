@@ -8,7 +8,12 @@
 <body>
 <div layout:fragment="content">
     <h1>Review index</h1>
-
+<div th:each="review : ${reviewList}">
+    <p th:text="${review.date}"></p>
+    <p th:text="${review.rating}"></p>
+    <p th:text="${review.comment}"></p>
+    <p th:text="${review.sweets.name}"></p>
+</div>
 
 </div>
 <style layout:fragment="style"></style>

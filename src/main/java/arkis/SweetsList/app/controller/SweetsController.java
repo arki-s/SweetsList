@@ -1,6 +1,8 @@
 package arkis.SweetsList.app.controller;
 
+import arkis.SweetsList.domain.model.Review;
 import arkis.SweetsList.domain.model.Sweets;
+import arkis.SweetsList.domain.repository.ReviewsRepository;
 import arkis.SweetsList.domain.repository.SweetsRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +21,9 @@ public class SweetsController {
 
     @Autowired
     SweetsRepository sweetsRepository;
+
+    @Autowired
+    ReviewsRepository reviewsRepository;
 
     @GetMapping("sweets/index")
     public ModelAndView sweetsindex(ModelAndView mav){
@@ -70,6 +77,17 @@ public class SweetsController {
         return new ModelAndView("redirect:/sweets/index");
     }
 
+    @GetMapping("sweets/detail/{sweetsId}")
+    public ModelAndView sweetsdetail(ModelAndView mav, @PathVariable Integer sweetsId){
+        mav.setViewName("sweets/detail");
+
+        Optional<Sweets> data = sweetsRepository.findById(sweetsId);
+        Sweets sweets = data.get();
+        mav.addObject("sweets", sweets);
+
+        return mav;
+    }
+
     @PostConstruct
     public void init() {
         Sweets s1 = new Sweets();
@@ -96,6 +114,22 @@ public class SweetsController {
         s4.setCalorie(2000);
         sweetsRepository.saveAndFlush(s3);
 
+
+        LocalDate today = LocalDate.now();
+
+        Review r1 = new Review();
+        r1.setDate(today);
+        r1.setComment("クリスマスにふさわしい一品でした！ただ、たっぷりのクリームのほかにソースを追加しないとちょっとボソボソしちゃうかも。");
+        r1.setRating(4);
+        r1.setSweets(s1);
+        reviewsRepository.saveAndFlush(r1);
+
+        Review r2 = new Review();
+        r2.setDate(today.minusDays(2));
+        r2.setComment("キャラメルクリームが美味しかったです。ただ、個人的にりんごのコンポートがちょっと多すぎかなという印象でした。");
+        r2.setRating(3);
+        r2.setSweets(s2);
+        reviewsRepository.saveAndFlush(r2);
 
     }
 
