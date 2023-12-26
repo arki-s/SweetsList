@@ -21,7 +21,6 @@
 
     <form method="post" th:action="@{/review/create}" th:object="${reviewModel}">
         <input type="hidden" th:value="${sweets.sweetsId}" name="sweets">
-        <input type="hidden" th:value="${today}" name="date">
         <div class="mb-3">
             <label>評価</label>
             <input type="text" name="rating" class="form-control">

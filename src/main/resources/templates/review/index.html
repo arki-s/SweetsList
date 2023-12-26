@@ -9,14 +9,27 @@
 <div layout:fragment="content">
     <h1>Review index</h1>
 <div th:each="review : ${reviewList}">
+    <p th:text="${review.sweets.name}"></p>
     <p th:text="${review.date}"></p>
     <p th:text="${review.rating}"></p>
     <p th:text="${review.comment}"></p>
-    <p th:text="${review.sweets.name}"></p>
+    <form th:action="@{'/review/' + ${review.reviewId} + '/delete'}" method="post" onSubmit="return check()">
+        <input type="hidden" name="reviewId" th:value="${review.reviewId}" />
+        <input type="submit" value="削除" class="btn btn-danger" />
+    </form>
 </div>
 
 </div>
 <style layout:fragment="style"></style>
-<script layout:fragment="script"></script>
+<script layout:fragment="script">
+    function check() {
+     if (window.confirm('このレビューを削除しますか?')) {
+         return true;
+     } else {
+         return false;
+     }
+ }
+
+</script>
 </body>
 </html>

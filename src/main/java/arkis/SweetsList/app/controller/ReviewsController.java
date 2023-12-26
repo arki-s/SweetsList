@@ -42,6 +42,8 @@ public class ReviewsController {
     @PostMapping("review/create")
     public ModelAndView reviewcreate(ModelAndView mav, @ModelAttribute("reviewModel")Review review, RedirectAttributes redirectAttributes){
 
+        LocalDate today = LocalDate.now();
+        review.setDate(today);
         reviewsRepository.saveAndFlush(review);
 
         Optional<Sweets> data = sweetsRepository.findById(review.getSweets().getSweetsId());
@@ -49,16 +51,14 @@ public class ReviewsController {
         mav.addObject("sweets", s);
         int sweetsId = s.getSweetsId();
 
-        LocalDate today = LocalDate.now();
-        mav.addObject("today", today);
-
         redirectAttributes.addAttribute("sweetsId",sweetsId);
         return new ModelAndView("redirect:/sweets/detail/{sweetsId}");
     }
 
     @Transactional
     @PostMapping("review/{reviewId}/delete")
-    public ModelAndView deleteReview(ModelAndView mav){
+    public ModelAndView deleteReview(ModelAndView mav, @RequestParam Integer reviewId){
+        reviewsRepository.deleteById(reviewId);
 
         return new ModelAndView("redirect:/review/index");
     }
