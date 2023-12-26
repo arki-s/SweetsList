@@ -8,11 +8,13 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -78,12 +80,17 @@ public class SweetsController {
     }
 
     @GetMapping("sweets/detail/{sweetsId}")
-    public ModelAndView sweetsdetail(ModelAndView mav, @PathVariable Integer sweetsId){
+    public ModelAndView sweetsdetail(ModelAndView mav, @ModelAttribute("reviewModel")Review review,@PathVariable Integer sweetsId){
         mav.setViewName("sweets/detail");
 
         Optional<Sweets> data = sweetsRepository.findById(sweetsId);
         Sweets sweets = data.get();
         mav.addObject("sweets", sweets);
+
+        LocalDate today = LocalDate.now();
+        mav.addObject("today", today);
+
+        mav.addObject("reviewModel", new Review());
 
         return mav;
     }
