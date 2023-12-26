@@ -40,5 +40,12 @@ padding:12px;
 border-radius:12px;
 background:#FFCCFF;
 margin:12px auto;
+}
 
+.small-card {
+margin: 1rem;
+padding:6px;
+border-radius:12px;
+opacity:0.7;
+background:#FFEEFF;
 }
