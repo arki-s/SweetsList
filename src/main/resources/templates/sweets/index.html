@@ -8,20 +8,30 @@
 <body>
 <div layout:fragment="content">
     <div class="common-container">
-    <h1>スイーツリスト</h1>
-    <div th:each="sweets : ${sweetsList}">
-        <p th:text="${sweets.name}"></p>
-        <div class="d-flex">
-            <p th:text="${sweets.calorie}"></p><p>kcal</p>
+        <h1>スイーツリスト</h1>
+        <div th:each="sweets : ${sweetsList}">
+            <div class="sweets-card">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h5 th:text="${sweets.name}"></h5>
+                    <div class="d-flex">
+                        <p th:text="${sweets.calorie}"></p>
+                        <p>kcal</p>
+                    </div>
+                    <p th:text="${sweets.comment}"></p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a th:href="@{'/sweets/' + ${sweets.sweetsId} + '/detail'}" class="btn btn-success me-2" style="height:38px; width:58px;">詳細</a>
+                    <a th:href="@{'/sweets/' + ${sweets.sweetsId} + '/edit'}" class="btn btn-info me-2" style="height:38px; width:58px;">編集</a>
+                    <form th:action="@{'/sweets/' + ${sweets.sweetsId} + '/delete'}" method="post"
+                          onSubmit="return check()">
+                        <input type="hidden" name="sweetsId" th:value="${sweets.sweetsId}"/>
+                        <input type="submit" value="削除" class="btn btn-danger"/>
+                    </form>
+                </div>
+            </div>
+            </div>
         </div>
-        <p th:text="${sweets.comment}"></p>
-        <a th:href="@{'/sweets/' + ${sweets.sweetsId} + '/detail'}" class="btn btn-success">詳細</a>
-        <a th:href="@{'/sweets/' + ${sweets.sweetsId} + '/edit'}" class="btn btn-info">編集</a>
-        <form th:action="@{'/sweets/' + ${sweets.sweetsId} + '/delete'}" method="post" onSubmit="return check()">
-            <input type="hidden" name="sweetsId" th:value="${sweets.sweetsId}" />
-            <input type="submit" value="削除" class="btn btn-danger" />
-        </form>
-    </div>
     </div>
 </div>
 <style layout:fragment="style"></style>

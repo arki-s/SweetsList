@@ -10,14 +10,22 @@
     <div class="common-container">
     <h1>レビューリスト</h1>
 <div th:each="review : ${reviewList}">
-    <p th:text="${review.sweets.name}"></p>
+    <div class="sweets-card">
+        <div class="d-flex justify-content-between">
+            <div>
+    <h5 th:text="${review.sweets.name}"></h5>
     <p th:text="${review.date}"></p>
     <p th:text="${review.rating}"></p>
     <p th:text="${review.comment}"></p>
+            </div>
+            <div class="d-flex align-items-center">
     <form th:action="@{'/review/' + ${review.reviewId} + '/delete'}" method="post" onSubmit="return check()">
         <input type="hidden" name="reviewId" th:value="${review.reviewId}" />
         <input type="submit" value="削除" class="btn btn-danger" />
     </form>
+            </div>
+        </div>
+    </div>
 </div>
     </div>
 

@@ -34,3 +34,11 @@
 .common-container {
 margin:1rem;
 }
+
+.sweets-card{
+padding:12px;
+border-radius:12px;
+background:#FFCCFF;
+margin:12px auto;
+
+}
